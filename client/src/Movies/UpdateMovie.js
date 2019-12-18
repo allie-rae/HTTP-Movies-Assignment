@@ -10,7 +10,7 @@ export function UpdateMovie(props) {
         stars: []
     })
 
-    const [star, setStar] = useState('')
+    const [stars, setStars] = useState('')
 
     useEffect(() => {
         axios.create({
@@ -30,15 +30,19 @@ export function UpdateMovie(props) {
         })
     }
 
+    const handleStarChanges = e => {
+        setStars(e.target.value)
+    }
+
     const submitMovie = (e) => {
         e.preventDefault();
         axios.create({
             baseURL: 'http://localhost:5000/api'
         })
-        .put(`/movies/${updatedMovie.id}`, updatedMovie)
+            .put(`/movies/${updatedMovie.id}`, updatedMovie)
         props.history.push('/')
-        }
-    
+    }
+
 
     return (
         <form onSubmit={submitMovie}>
@@ -60,13 +64,22 @@ export function UpdateMovie(props) {
                 placeholder="Metascore"
                 onChange={handlechanges}
             />
-            {/* <input
-                name=""
-                value={}
-                placeholder=""
-                onChange={handlechanges}
-            /> */}
-            <button>Submit Changes</button>
+            <input
+                name="stars"
+                value={stars}
+                placeholder="Add Stars"
+                onChange={handleStarChanges}
+            />
+            <button 
+            type="button"
+            onClick={e => {
+                e.preventDefault();
+                setUpdatedMovie({
+                    ...updatedMovie, stars: [...updatedMovie.stars, stars]
+                })
+                setStars('')
+            }}>Add Star</button>
+            <button type="submit">Submit Changes</button>
         </form>
     )
 }

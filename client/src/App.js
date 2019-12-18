@@ -26,7 +26,7 @@ const App = () => {
         render={props => {
           return <UpdateMovie {...props} />
         }}
-        path="/update-movie/:id" component={UpdateMovie} />
+        path="/update-movie/:id" />
     </>
   );
 };

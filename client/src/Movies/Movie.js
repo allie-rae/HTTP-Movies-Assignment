@@ -45,6 +45,18 @@ export default class Movie extends React.Component {
         }}>
           Edit
         </div>
+        <div onClick={e => {
+          e.preventDefault();
+          axios.create({
+            baseURL: 'http://localhost:5000/api'
+        }).delete(`/movies/${this.state.movie.id}`)
+        .then(res => {
+          this.props.history.push('/')
+        })
+        .catch(err => console.log(err))
+        }}>
+          Delete
+        </div>
         <div className="save-button" onClick={this.saveMovie}>
           Save
         </div>
