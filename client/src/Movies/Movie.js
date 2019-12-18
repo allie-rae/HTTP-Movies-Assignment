@@ -39,6 +39,12 @@ export default class Movie extends React.Component {
     return (
       <div className="save-wrapper">
         <MovieCard movie={this.state.movie} />
+        <div onClick={e => {
+          e.preventDefault();
+          this.props.history.push(`/update-movie/${this.state.movie.id}`)
+        }}>
+          Edit
+        </div>
         <div className="save-button" onClick={this.saveMovie}>
           Save
         </div>
